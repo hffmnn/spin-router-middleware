@@ -6,7 +6,7 @@
 ///
 /// # Example
 ///
-/// ```ignore
+/// ```ignore rust
 /// use spin_sdk::http::{IntoResponse, Request, Response, ResponseBuilder, Router};
 /// use spin_router_middleware::{MiddlewareBuilder, Middleware, Next};
 /// use task_local_extensions::Extensions;
@@ -31,20 +31,17 @@
 /// async fn handle_cors_tester(req: Request) -> Response {
 ///     let mut router = Router::new();
 ///     router.get_async("/", api::get);
-///     MiddlewareBuilder::new(router).with(TransparentMiddleware).run(req).await;
+///     MiddlewareBuilder::new(router).with(TransparentMiddleware).run(req).await
 /// }
 ///
 /// mod api {
-///     use spin_sdk::http::Params;
+///     use spin_sdk::http::{Request, Response, Params};
 ///
-///     use super::*;
-///
-///     // /goodbye/:planet
-///     pub async fn get(_req: Request, _params: Params) -> anyhow::Result<impl IntoResponse> {
-///         Ok(Response::new(200, ()))
+///     // /
+///     pub async fn get(_req: Request, _params: Params) -> Response {
+///         Response::new(200, ())
 ///     }
 /// }
-
 /// ```
 ///
 /// [`Router`]: https://docs.rs/spin-sdk/latest/spin_sdk/http/struct.Router.html

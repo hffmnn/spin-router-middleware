@@ -8,6 +8,7 @@
 use spin_sdk::http::{IntoResponse, Request, Response, ResponseBuilder, Router};
 use spin_router_middleware::{MiddlewareBuilder, Middleware, Next};
 use task_local_extensions::Extensions;
+use spin_sdk::http_component;
 
 struct TransparentMiddleware;
 
@@ -23,9 +24,21 @@ impl Middleware for TransparentMiddleware {
     }
 }
 
-let mut router = Router::new();
-router.get_async("/", get);
-let builder = MiddlewareBuilder::new(router).with(TransparentMiddleware);
+#[http_component]
+async fn handle_cors_tester(req: Request) -> Response {
+    let mut router = Router::new();
+    router.get_async("/", api::get);
+    MiddlewareBuilder::new(router).with(TransparentMiddleware).run(req).await
+}
+
+mod api {
+    use spin_sdk::http::{Request, Response, Params};
+
+    // /
+    pub async fn get(_req: Request, _params: Params) -> Response {
+        Response::new(200, ())
+    }
+}j
 ```
 
 ## Inspiration
