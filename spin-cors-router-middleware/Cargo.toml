@@ -1,0 +1,12 @@
+[package]
+name = "spin-cors-router-middleware"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.79"
+async-trait = "0.1.77"
+http = "1.0.0"
+spin-router-middleware = { version = "0.1.0", path = "../spin-router-middleware" }
+spin-sdk = "2"
+task-local-extensions = "0.1.4"
