@@ -1,4 +1,9 @@
-// use anyhow::Result;
+// all parts in here are based on https://github.com/ThorstenHans/spin-contrib-http
+// I updated the code to work with the latest version of the spin-sdk and changed the
+// builder_with_cors (which uses a http::builder) function to response_with_cors
+// which is a function that takes a Response and adds the necessary headers to it.
+// TODO: Add a PR to https://github.com/ThorstenHans/spin-contrib-http
+
 use spin_sdk::http::{Request, Response, ResponseBuilder};
 
 /// This struct is used to configure CORS support
