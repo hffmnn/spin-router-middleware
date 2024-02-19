@@ -1,7 +1,7 @@
 use spin_cors_router_middleware::{
     Config, CorsMiddleware, MiddlewareBuilder, ALL_HEADERS, ALL_METHODS, ALL_ORIGINS,
 };
-use spin_sdk::http::{IntoResponse, Request, Response, Router};
+use spin_sdk::http::{Request, Response, Router};
 use spin_sdk::http_component;
 
 #[http_component]
@@ -23,8 +23,8 @@ mod api {
 
     use super::*;
 
-    // /goodbye/:planet
-    pub async fn get(_req: Request, _params: Params) -> anyhow::Result<impl IntoResponse> {
-        Ok(Response::new(200, ()))
+    // /
+    pub async fn get(_req: Request, _params: Params) -> Response {
+        Response::new(200, ())
     }
 }
