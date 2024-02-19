@@ -4,9 +4,6 @@ use task_local_extensions::Extensions;
 
 use super::middleware::{Middleware, Next};
 
-/// A `MiddlewareBuilder` is used to attach a [`spin_sdk::http::Router`] to one or more [`Middleware`]s.
-///
-/// [`Middleware`]: super::middleware::Middleware
 pub struct MiddlewareBuilder {
     router: Router,
     middleware_stack: Vec<Arc<dyn Middleware>>,

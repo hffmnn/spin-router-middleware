@@ -4,9 +4,7 @@ use spin_cors_router_middleware::{
 use spin_sdk::http::{IntoResponse, Request, Response, Router};
 use spin_sdk::http_component;
 
-/// A simple Spin HTTP component.
 #[http_component]
-
 async fn handle_cors_tester(req: Request) -> Response {
     let mut router = Router::new();
     router.get_async("/", api::get);

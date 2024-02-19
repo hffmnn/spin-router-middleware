@@ -2,33 +2,6 @@ use spin_sdk::http::{Request, Response, Router};
 use std::sync::Arc;
 use task_local_extensions::Extensions;
 
-/// When attached to a [`ClientWithMiddleware`] (generally using [`with`]), middleware is run
-/// whenever the client issues a request, in the order it was attached.
-///
-/// # Example
-///
-/// ```
-/// use spin_sdk::http::{IntoResponse, Request, Response, ResponseBuilder, Router};
-/// use spin_router_middleware::{MiddlewareBuilder, Middleware, Next};
-/// use task_local_extensions::Extensions;
-///
-/// struct TransparentMiddleware;
-///
-/// #[async_trait::async_trait(?Send)]
-/// impl Middleware for TransparentMiddleware {
-///     async fn handle(
-///         &self,
-///         req: Request,
-///         extensions: &mut Extensions,
-///         next: Next<'_>,
-///     ) -> Response {
-///         next.run(req, extensions).await
-///     }
-/// }
-/// ```
-///
-/// [`ClientWithMiddleware`]: crate::ClientWithMiddleware
-/// [`with`]: crate::ClientBuilder::with
 #[async_trait::async_trait(?Send)]
 pub trait Middleware: 'static + Send + Sync {
     /// Invoked with a request before sending it. If you want to continue processing the request,
